@@ -17,6 +17,6 @@ public interface EncuestaRepository extends JpaRepository<Encuesta, Long> {
     Double promedioEdad();
 
     // Obtener la distribución de niveles de satisfacción
-    @Query("SELECT e.nivelSatisfaccion, COUNT(e) * 100.0 / (SELECT COUNT(e) FROM Encuesta e) FROM Encuesta e GROUP BY e.nivelSatisfaccion")
+    @Query("SELECT e.nivelSatisfaccion, COUNT(e) FROM Encuesta e GROUP BY e.nivelSatisfaccion")
     List<Object[]> distribucionSatisfaccion();
 }
