@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ENCUESTA</title>
+</head>
+<body>
+<h1>ENCUESTA</h1><br>
+<form th:action="@{/api/encuestas}" method="POST" th:object="${encuesta}">
+
+        <label>Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" >
+        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span><br>
+
+        <label>Apellidos:</label>
+        <input type="text" id="apellidos" th:field="*{apellidos}" >
+        <span th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></span><br>
+
+        <label>Email:</label>
+        <input type="text" id="email" th:field="*{email}" >
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>
+
+
+        <label>Edad:</label>
+        <input type="number" id="edad" th:field="*{edad}" min="18" >
+        <span th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></span><br>
+
+
+        <label>Teléfono:</label>
+        <input type="tel" id="telefono" th:field="*{telefono}">
+        <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></span><br>
+
+
+
+        <label>Fecha de inicio:</label>
+        <input type="date" id="fechaInicio" th:field="*{fechaInicio}" >
+        <span th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}"></span><br>
+
+
+        <label>Motivo de la visita:</label>
+        <select id="motivoVisita" th:field="*{motivoVisita}">
+            <option value="">Seleccione una opción</option>
+            <option th:value="TRABAJO">Trabajo</option>
+            <option th:value="ESTUDIOS">Estudios</option>
+            <option th:value="TURISMO">Turismo</option>
+            <option th:value="OTROS">Otros</option>
+        </select>
+        <span th:if="${#fields.hasErrors('motivoVisita')}" th:errors="*{motivoVisita}"></span><br>
+
+
+        <label>Servicios utilizados:</label>
+        <input type="checkbox" id="restaurante" th:field="*{serviciosUsados}" th:value="RESTAURANTE">
+        <label for="restaurante">Restaurante</label>
+        <input type="checkbox" id="gimnasio" th:field="*{serviciosUsados}" th:value="GIMNASIO">
+        <label for="gimnasio">Gimnasio</label>
+        <input type="checkbox" id="spa" th:field="*{serviciosUsados}" th:value="SPA">
+        <label for="spa">Spa</label>
+        <input type="checkbox" id="piscina" th:field="*{serviciosUsados}" th:value="PISCINA">
+        <label for="piscina">Piscina</label>
+        <input type="checkbox" id="roomService" th:field="*{serviciosUsados}" th:value="ROOM_SERVICE">
+        <label for="roomService">Room service</label><br>
+
+
+        <label>Nivel de satisfacción general:</label>
+        <input type="radio" id="muySatisfecho" name="nivelSatisfaccion" th:field="*{nivelSatisfaccion}" th:value="MUY_SATISFECHO">
+        <label for="muySatisfecho">Muy satisfecho</label>
+        <input type="radio" id="satisfecho" name="nivelSatisfaccion" th:field="*{nivelSatisfaccion}" th:value="SATISFECHO">
+        <label for="satisfecho">Satisfecho</label>
+        <input type="radio" id="neutral" name="nivelSatisfaccion" th:field="*{nivelSatisfaccion}" th:value="NEUTRAL">
+        <label for="neutral">Neutral</label>
+        <input type="radio" id="insatisfecho" name="nivelSatisfaccion" th:field="*{nivelSatisfaccion}" th:value="INSATISFECHO">
+        <label for="insatisfecho">Insatisfecho</label>
+        <input type="radio" id="muyInsatisfecho" name="nivelSatisfaccion" th:field="*{nivelSatisfaccion}" th:value="MUY_INSATISFECHO">
+        <label for="muyInsatisfecho">Muy insatisfecho</label>
+        <span th:if="${#fields.hasErrors('nivelSatisfaccion')}" th:errors="*{nivelSatisfaccion}"></span><br>
+
+
+        <label>Otros comentarios:</label>
+        <textarea id="otrosComentarios" th:field="*{otrosComentarios}"></textarea><br>
+
+
+
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>

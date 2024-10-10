@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Encuestas</title>
+</head>
+<body>
+<h1>Listado de Encuestas</h1>
+
+<form th:action="@{/encuestas}" method="get">
+    <label for="filtroNivel">Filtrar por nivel de satisfacción:</label>
+    <select id="filtroNivel" name="filtroNivel">
+        <option value="" th:selected="${filtroNivel == ''}">Todos</option>
+        <option value="MUY_SATISFECHO" th:selected="${filtroNivel == 'MUY_SATISFECHO'}">Muy satisfecho</option>
+        <option value="SATISFECHO" th:selected="${filtroNivel == 'SATISFECHO'}">Satisfecho</option>
+        <option value="NEUTRAL" th:selected="${filtroNivel == 'NEUTRAL'}">Neutral</option>
+        <option value="INSATISFECHO" th:selected="${filtroNivel == 'INSATISFECHO'}">Insatisfecho</option>
+        <option value="MUY_INSATISFECHO" th:selected="${filtroNivel == 'MUY_INSATISFECHO'}">Muy insatisfecho</option>
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre del huésped</th>
+        <th>Fecha de inicio</th>
+        <th>Nivel de satisfacción</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="encuesta : ${encuestas}">
+        <td th:text="${encuesta.nombre}"></td>
+        <td th:text="${encuesta.fechaInicio}"></td>
+        <td th:text="${encuesta.nivelSatisfaccion}"></td>
+        <td>
+            <a th:href="@{/encuestas/ver/{id}(id=${encuesta.id})}">Ver</a>
+            <a th:href="@{/encuestas/editar/{id}(id=${encuesta.id})}">Editar</a>
+            <form th:action="@{/encuestas/borrar/{id}(id=${encuesta.id})}" method="post" style="display:inline">
+                <button type="submit">Borrar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Estadísticas</h2>
+<p>Número total de encuestas: <span th:text="${totalEncuestas}"></span></p>
+<p>Promedio de edad de los encuestados: <span th:text="${promedioEdad}">0</span></p>
+
+<h3>Distribución de niveles de satisfacción</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nivel de satisfacción</th>
+        <th>Porcentaje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="distribucion : ${distribucionSatisfaccion}">
+        <td th:text="${distribucion[0]}"></td>
+        <td th:text="${distribucion[1]} + '%'"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
